@@ -2,11 +2,11 @@ var path = require('path');
 
 module.exports = {
   entry: [
-    './client'
+    './client/index.js'
   ],
   resolve: {
     modulesDirectories: ['node_modules', 'shared'],
-    extensions:         ['', '.js', '.jsx']
+    extensions:         ['', '.js']
   },
   output: {
     path:       path.join(__dirname, 'dist'),
@@ -16,9 +16,10 @@ module.exports = {
   module: {
     loaders: [
       {
-        test:    /\.jsx?$/,
+        test:    /\.js?$/,
         exclude: /node_modules/,
         loaders: ['babel']
       }
     ]
-  },
+  }
+}

@@ -1,10 +1,7 @@
-import webpack              from 'webpack';
-import assign               from 'object-assign';
-import webpackDevMiddleware from 'webpack-dev-middleware';
-import webpackHotMiddleware from 'webpack-hot-middleware';
-import prodCfg              from './webpack.prod.config.js';
+'use strict';
 
-Object.assign = assign;
+var path = require('path');
+var webpack = require('webpack');
 
 const BABEL_QUERY = {
   presets: ['react', 'es2015'],
@@ -27,32 +24,31 @@ const BABEL_QUERY = {
   ]
 }
 
-export default function(app) {
-  const config = Object.assign(prodCfg, {
-    devtool: 'inline-source-map',
-    entry:   [
-      'webpack-hot-middleware/client',
-      './client'
-    ],
-    module: {
-      loaders: [
-        {
-          test:    /\.jsx?$/,
-          exclude: /node_modules/,
-          loader:  'babel',
-          query:   BABEL_QUERY
-        }
-      ]
-    },
-    plugins: [
-      new webpack.optimize.OccurenceOrderPlugin(),
-      new webpack.HotModuleReplacementPlugin(),
-      new webpack.NoErrorsPlugin()
-    ],
-  });
-
-  const compiler = webpack(config);
-
-  app.use(webpackDevMiddleware(compiler, { noInfo: true }));
-  app.use(webpackHotMiddleware(compiler));
-}
+module.exports = {
+  devtool: 'eval-source-map',
+  entry: [
+    'webpack-hot-middleware/client?reload=true',
+    path.join(__dirname, './client')
+  ],
+  output: {
+    path: path.join(__dirname, '/dist/'),
+    filename: 'bundle.js',
+    publicPath: '/'
+  },
+  plugins: [
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin(),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('development')
+    })
+  ],
+  module: {
+    loaders: [{
+      test: /\.js?$/,
+      exclude: /node_modules/,
+      loader: 'babel',
+      query: BABEL_QUERY
+    }]
+  }
+};
