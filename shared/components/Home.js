@@ -6,13 +6,7 @@ import * as TodoActions       from '../actions/TodoActions';
 import { connect }            from 'react-redux';
 
 @connect(state => ({ todos: state.todos }))
-
 export default class Home extends React.Component {
-  static propTypes = {
-    todos:    PropTypes.any.isRequired,
-    dispatch: PropTypes.func.isRequired
-  };
-
   static needs = [
     TodoActions.getTodos
   ];
@@ -30,4 +24,9 @@ export default class Home extends React.Component {
       </div>
     );
   };
+}
+
+Home.proptypes = {
+  todos:    PropTypes.any.isRequired,
+  dispatch: PropTypes.func.isRequired
 }

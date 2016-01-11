@@ -8,7 +8,7 @@
 7 info dev universal-react@1.0.0
 8 verbose unsafe-perm in lifecycle true
 9 info universal-react@1.0.0 Failed to exec dev script
-10 verbose stack Error: universal-react@1.0.0 dev: `PORT=8080 NODE_PATH=$NODE_PATH:./shared babel-node index`
+10 verbose stack Error: universal-react@1.0.0 dev: `PORT=8080 NODE_ENV=development NODE_PATH=$NODE_PATH:./shared node index`
 10 verbose stack Exit status 8
 10 verbose stack     at EventEmitter.<anonymous> (/usr/local/lib/node_modules/npm/lib/utils/lifecycle.js:212:16)
 10 verbose stack     at EventEmitter.emit (events.js:98:17)
@@ -23,13 +23,13 @@
 15 error node v0.10.35
 16 error npm  v2.1.18
 17 error code ELIFECYCLE
-18 error universal-react@1.0.0 dev: `PORT=8080 NODE_PATH=$NODE_PATH:./shared babel-node index`
+18 error universal-react@1.0.0 dev: `PORT=8080 NODE_ENV=development NODE_PATH=$NODE_PATH:./shared node index`
 18 error Exit status 8
-19 error Failed at the universal-react@1.0.0 dev script 'PORT=8080 NODE_PATH=$NODE_PATH:./shared babel-node index'.
+19 error Failed at the universal-react@1.0.0 dev script 'PORT=8080 NODE_ENV=development NODE_PATH=$NODE_PATH:./shared node index'.
 19 error This is most likely a problem with the universal-react package,
 19 error not with npm itself.
 19 error Tell the author that this fails on your system:
-19 error     PORT=8080 NODE_PATH=$NODE_PATH:./shared babel-node index
+19 error     PORT=8080 NODE_ENV=development NODE_PATH=$NODE_PATH:./shared node index
 19 error You can get their info via:
 19 error     npm owner ls universal-react
 19 error There is likely additional logging output above.

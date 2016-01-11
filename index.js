@@ -1,81 +1,38 @@
 'use strict';
 
-import path from 'path';
-import express from 'express';
-import webpack from 'webpack';
-import webpackHotMiddleware from 'webpack-hot-middleware';
-import webpackMiddleware from 'webpack-dev-middleware';
+var path = require('path');
+var express = require('express');
+var webpack = require('webpack');
+var webpackHotMiddleware = require('webpack-hot-middleware');
+var webpackMiddleware = require('webpack-dev-middleware');
+var config = require('./webpack.config.js');
 
-import React from 'react';
-import config from './webpack.config.js';
-import { renderToString } from 'react-dom/server'
-import { RoutingContext, match } from 'react-router';
-import createLocation from 'history/lib/createLocation';
+var renderApp = require('./dist/server-bundle.js');
 
-import { createStore, combineReducers } from 'redux';
-import { Provider } from 'react-redux';
-import * as reducers from './shared/reducers/index';
-import routes from './shared/routes';
+var port = process.env.PORT || 3000;
+var app = express();
 
-const port = process.env.PORT || 3000;
-const app = express();
-
-const compiler = webpack(config);
-const middleware = webpackMiddleware(compiler, {
-  publicPath: config.output.publicPath,
-  contentBase: 'src',
-  stats: {
-    colors: true,
-    hash: false,
-    timings: true,
-    chunks: false,
-    chunkModules: false,
-    modules: false
-  }
-});
-
-app.use(middleware);
-app.use(webpackHotMiddleware(compiler));
-
-app.use((req, res) => {
-  const location = createLocation(req.url);
-  const reducer = combineReducers(reducers);
-  const store = createStore(reducer);
-
-  match({ routes, location }, (err, redirectLocation, renderProps) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).end('Internal server error');
+if(process.env.NODE_ENV === 'development'){
+  var compiler = webpack(config);
+  var middleware = webpackMiddleware(compiler, {
+    publicPath: config[0].output.publicPath,
+    contentBase: 'src',
+    stats: {
+      colors: true,
+      hash: false,
+      timings: true,
+      chunks: false,
+      chunkModules: false,
+      modules: false
     }
-
-    if (!renderProps) return res.status(404).end('Not found.');
-
-    const InitialComponent = (
-      <Provider store={store}>
-        <RoutingContext {...renderProps} />
-      </Provider>
-    );
-    const initialState = store.getState();
-    const componentHTML = renderToString(InitialComponent);
-
-    const HTML = `
-    <!DOCTYPE html>
-    <html>
-      <head>
-        <meta charset="utf-8">
-        <title>Isomorphic Redux Demo</title>
-        <script type="application/javascript">
-          window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};
-        </script>
-      </head>
-      <body>
-        <div id="react-view">${componentHTML}</div>
-        <script type="application/javascript" src="/bundle.js"></script>
-      </body>
-    </html>
-    `
-    res.end(HTML);
   });
+
+  app.use(middleware);
+  app.use(webpackHotMiddleware(compiler));
+}
+
+app.get('*', function (req, res, next) {
+  renderApp(req, res);
 });
 
 app.listen(port, '0.0.0.0', function onStart(err) {
