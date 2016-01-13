@@ -6,7 +6,7 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: [/\.js$/, /\.es6$/], exclude: /node_modules/, loader: 'babel-loader' },
+      { test: [/\.js$/], exclude: /node_modules/, loader: 'babel-loader' },
       { test: [/\.css$/], loader: 'css' },
       { test: [/\.scss$/],loaders: ['style', 'sass'] }
     ]
