@@ -7,15 +7,16 @@ var webpackHotMiddleware = require('webpack-hot-middleware');
 var webpackMiddleware = require('webpack-dev-middleware');
 var config = require('./webpack.config.js');
 
-var renderApp = require('./dist/server-bundle.js');
-
 var port = process.env.PORT || 3000;
 var app = express();
 
+console.log(process.env.NODE_ENV);
+
 if(process.env.NODE_ENV === 'development'){
+  console.log('we should be hotloading');
   var compiler = webpack(config);
   var middleware = webpackMiddleware(compiler, {
-    publicPath: config[0].output.publicPath,
+    publicPath: config.output.publicPath,
     contentBase: 'src',
     stats: {
       colors: true,
@@ -31,9 +32,7 @@ if(process.env.NODE_ENV === 'development'){
   app.use(webpackHotMiddleware(compiler));
 }
 
-app.get('*', function (req, res, next) {
-  renderApp(req, res);
-});
+app.use('/', express.static(__dirname));
 
 app.listen(port, '0.0.0.0', function onStart(err) {
   if (err) {
