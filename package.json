@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "NODE_ENV=production NODE_PATH=$NODE_PATH:./shared node index",
-    "dev": "webpack-dev-server --hot --inline",
+    "dev": "webpack-dev-server --port 8081 --hot --inline",
     "build": "rimraf dist && webpack --config ./webpack.config.js --progress --profile --colors"
   },
   "author": "Kiran Surdhar",
