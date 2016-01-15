@@ -1,14 +1,20 @@
-// import { Component } from "react";
-import React from "react";
+import React, { Component } from "react";
 
-// export default class Hello extends Component {
-export default React.createClass({
+export default class Hello extends Component {
+  constructor(){
+    super();
+  }
+
+  testHandler = (testArg) => {
+    console.log('testing, 123');
+  };
+
   render() {
+    this.testHandler();
     return (
       <div>
-        holy shit, {this.props.name}!!
+        Welcome, {this.props.name}.
       </div>
     );
   }
-});
-// };
+};
