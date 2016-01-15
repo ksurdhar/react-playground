@@ -17,7 +17,7 @@ import Hello from './Hello';
 
 render(
   <Hello name="kiran"/>,
-  document.body
+  document.getElementById('react-view')
 );
 
 // render(
