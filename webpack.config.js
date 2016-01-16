@@ -15,7 +15,7 @@ var commonLoaders = [
 ];
 
 module.exports = {
-  devtool: 'eval-source-map',
+  devtool: 'source-map',
   entry: {
     bundle: "./client/index.js",
     html: "./index.html"
