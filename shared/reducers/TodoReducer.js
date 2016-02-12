@@ -7,7 +7,7 @@ export default function todoReducer(state = defaultState, action) {
     case 'GET_TODOS':
       return new Immutable.List(action.data);
     case 'CREATE_TODO':
-      return state.concat(action.data.text);
+      return state.concat(action.text);
     case 'EDIT_TODO':
       return state.set(action.id, action.text);
     case 'DELETE_TODO':
