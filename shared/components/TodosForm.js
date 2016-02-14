@@ -7,7 +7,6 @@ export default class TodosForm extends React.Component {
   };
 
   handleSubmit = () => {
-    console.log('handlesubmit fired');
     let node = this.refs['todo-input'];
 
     this.props.createTodo(node.value);
@@ -16,11 +15,10 @@ export default class TodosForm extends React.Component {
   };
 
   render() {
-    console.log(this.handleSubmit);
     return (
       <div>
         <input type="text" placeholder="type todo" ref="todo-input" />
-        <input type="submit" value="OK!" onClick={this.handleSubmit} />
+        <input type="submit" value="Submit" onClick={ this.handleSubmit } />
       </div>
     );
   };

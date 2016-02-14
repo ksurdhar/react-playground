@@ -16,17 +16,17 @@ export default class Home extends React.Component {
 
     return (
       <div id="todo-list">
-        <TodosView todos={todos}
-          {...bindActionCreators(TodoActions, dispatch)} />
+        <TodosView todos={ todos }
+          { ...bindActionCreators(TodoActions, dispatch) } />
 
         <TodosForm
-          {...bindActionCreators(TodoActions, dispatch)}/>
+          { ...bindActionCreators(TodoActions, dispatch) }/>
       </div>
     );
   };
 }
 
 Home.proptypes = {
-  todos:    PropTypes.any.isRequired,
+  todos: PropTypes.any.isRequired,
   dispatch: PropTypes.func.isRequired
 }

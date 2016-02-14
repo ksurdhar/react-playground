@@ -1,8 +1,8 @@
-import React       from 'react';
-import { render }  from 'react-dom';
-import { Router }  from 'react-router';
+import React from 'react';
+import { render } from 'react-dom';
+import { Router } from 'react-router';
 import createBrowserHistory from 'history/lib/createBrowserHistory';
-import routes      from '../shared/routes.js';
+import routes from '../shared/routes.js';
 import * as reducers from '../shared/reducers/index';
 import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
@@ -15,12 +15,6 @@ const initialState = {};
 const reducer = combineReducers(reducers);
 const store = createStore(reducer, initialState);
 
-// render(
-//   <Hello name="kiran"/>,
-//   document.getElementById('react-view')
-// );
-
-console.log('I AM THE STORE', store);
 render(
   <Provider store={ store }>
     <Router children={ routes } history={ history } />

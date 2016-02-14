@@ -13,7 +13,7 @@ export default class Hello extends Component {
     this.testHandler();
     return (
       <div>
-        Welcome, {this.props.name}.
+        Welcome, { this.props.name }.
       </div>
     );
   }

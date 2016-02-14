@@ -16,7 +16,7 @@ export default class TodosView extends React.Component {
   };
 
   handleEdit = (e) => {
-    const id         = Number(e.target.dataset.id);
+    const id = Number(e.target.dataset.id);
     const currentVal = this.props.todos.get(id);
 
     let text = window.prompt('', currentVal);
@@ -34,10 +34,10 @@ export default class TodosView extends React.Component {
         {
           this.props.todos.map(function (todo, index) {
             return (
-              <div style={btnStyle} key={index}>
-                <span>{todo}</span>
-                <button style={btnStyle} data-id={index} onClick={this.handleDelete}>X</button>
-                <button style={btnStyle} data-id={index} onClick={this.handleEdit}>Edit</button>
+              <div style={ btnStyle } key={ index }>
+                <span>{ todo }</span>
+                <button style={ btnStyle } data-id={ index } onClick={ this.handleDelete }>Delete</button>
+                <button style={ btnStyle } data-id={ index } onClick={ this.handleEdit }>Edit</button>
               </div>
             );
           }.bind(this))
