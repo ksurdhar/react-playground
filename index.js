@@ -1,8 +1,11 @@
 'use strict';
 
+require('babel-core/register')({});
+require('babel-polyfill');
+
+var server = require('./server').default;
+
 var port = process.env.PORT || 3000;
-
-
 
 server.listen(port, '0.0.0.0', function onStart(err) {
   if (err) {
