@@ -1,4 +1,3 @@
-
 import React, { PropTypes } from 'react';
 
 export default class TodosForm extends React.Component {

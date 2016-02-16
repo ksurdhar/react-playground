@@ -5,7 +5,7 @@ export default class SubnoteView extends React.Component {
     console.log('hey')
     return (
       <div id="sub-note">
-        <span>This is a test of react routes</span>
+        <span>This is a test of react routes!!!</span>
       </div>
     );
   };

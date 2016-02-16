@@ -3,7 +3,7 @@
 require('babel-core/register')({});
 require('babel-polyfill');
 
-var server = require('./server').default;
+var server = require('./server.js').default;
 
 var port = process.env.PORT || 3000;
 

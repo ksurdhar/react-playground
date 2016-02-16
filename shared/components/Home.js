@@ -1,9 +1,9 @@
-import React, { PropTypes }   from 'react';
-import TodosView              from './TodosView';
-import TodosForm              from './TodosForm';
+import React, { PropTypes } from 'react';
+import TodosView from './TodosView';
+import TodosForm from './TodosForm';
 import { bindActionCreators } from 'redux';
-import * as TodoActions       from '../actions/TodoActions';
-import { connect }            from 'react-redux';
+import * as TodoActions from '../actions/TodoActions';
+import { connect } from 'react-redux';
 
 @connect(state => ({ todos: state.todos }))
 export default class Home extends React.Component {
