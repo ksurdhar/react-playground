@@ -17,8 +17,7 @@ var commonLoaders = [
 module.exports = {
   devtool: 'source-map',
   entry: {
-    bundle: "./client/index.js",
-    html: "./index.html"
+    bundle: "./client/index.js"
   },
   output: {
     path: path.join(__dirname, '/dist/'),
