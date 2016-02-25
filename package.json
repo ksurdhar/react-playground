@@ -11,6 +11,7 @@
   "author": "Kiran Surdhar",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.9.1",
     "babel-core": "^6.5.2",
     "babel-plugin-react-transform": "^2.0.0",
     "babel-polyfill": "^6.5.0",

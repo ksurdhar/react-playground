@@ -5,18 +5,18 @@ import { bindActionCreators } from 'redux';
 import * as TodoActions from '../actions/TodoActions';
 import { connect } from 'react-redux';
 
-@connect(state => ({ todos: state.todos }))
+// @connect(state => ({ users: state.users, todos: state.todos }))
 export default class Home extends React.Component {
   static needs = [
-    TodoActions.getTodos
+    TodoActions.getUsers
   ];
 
   render() {
-    const { todos, dispatch } = this.props;
+    const { users, todos, dispatch } = this.props;
 
     return (
       <div id="todo-list">
-        <TodosView todos={ todos }
+        <TodosView todos={ todos } users={ users }
           { ...bindActionCreators(TodoActions, dispatch) } />
 
         <TodosForm
@@ -27,6 +27,9 @@ export default class Home extends React.Component {
 }
 
 Home.proptypes = {
+  users: PropTypes.any.isRequired,
   todos: PropTypes.any.isRequired,
   dispatch: PropTypes.func.isRequired
 }
+
+export default connect(state => ({ todos: state.todos, users: state.users }))(Home)

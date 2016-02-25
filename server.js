@@ -1,12 +1,16 @@
 import express                   from 'express';
 import React                     from 'react';
 import { renderToString }        from 'react-dom/server'
-import { RouterContext, match } from 'react-router';
+import { RouterContext, match }  from 'react-router';
 import createLocation            from 'history/lib/createLocation';
 import routes                    from 'routes';
 import { Provider }              from 'react-redux';
 import * as reducers             from 'reducers';
-import { createStore, combineReducers } from 'redux';
+import promiseMiddleware         from './lib/promiseMiddleware';
+import fetchComponentData        from './lib/fetchComponentData';
+import { createStore,
+         combineReducers,
+         applyMiddleware }       from 'redux';
 import path                      from 'path';
 import bodyParser                from 'body-parser';
 
@@ -28,7 +32,7 @@ app.use(userRoutes);
 app.use( (req, res) => {
   var location = createLocation(req.url);
   var reducer = combineReducers(reducers);
-  // var store = applyMiddleware(promiseMiddleware)(createStore)(reducer); don't forget to re import this
+  var store = applyMiddleware(promiseMiddleware)(createStore)(reducer);
   var store = createStore(reducer, {});
 
   match({ routes, location }, (err, redirectLocation, renderProps) => {
@@ -42,11 +46,12 @@ app.use( (req, res) => {
 
     function renderView() {
       var InitialView = (
-        <Provider store={store}>
-          <RouterContext {...renderProps} />
+        <Provider store={ store }>
+          <RouterContext { ...renderProps } />
         </Provider>
       );
 
+      const initialState = store.getState();
       var componentHTML = renderToString(InitialView);
 
       var HTML = `
@@ -55,7 +60,9 @@ app.use( (req, res) => {
         <head>
           <meta charset="utf-8">
           <title>Isomorphic Kindling, Bitch</title>
-
+          <script>
+            window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};
+          </script>
         </head>
         <body>
           MAYBE YOU JUST NEVER MADE SOMETHING COMPELLING
@@ -69,13 +76,13 @@ app.use( (req, res) => {
     }
 
     //we aren't fetching data yet. just render the view!
-    // fetchComponentData(store.dispatch, renderProps.components, renderProps.params)
-    //   .then(renderView)
-    //   .then(html => res.end(html))
-    //   .catch(err => res.end(err.message));
+    fetchComponentData(store.dispatch, renderProps.components, renderProps.params)
+      .then(renderView)
+      .then(html => res.end(html))
+      .catch(err => res.end(err.message));
 
-    var html = renderView();
-    res.end(html);
+    // var html = renderView();
+    // res.end(html);
   });
 });
 

@@ -4,6 +4,7 @@ import Immutable     from 'immutable';
 
 export default class TodosView extends React.Component {
   static propTypes = {
+    users:      PropTypes.instanceOf(Immutable.List).isRequired,
     todos:      PropTypes.instanceOf(Immutable.List).isRequired,
     editTodo:   PropTypes.func.isRequired,
     deleteTodo: PropTypes.func.isRequired
