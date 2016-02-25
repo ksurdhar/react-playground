@@ -4,8 +4,6 @@ require('babel-core/register')({});
 require('babel-polyfill');
 
 var server = require('./server.js').default;
-server.use(bodyParser.urlencoded());
-server.use(bodyParser.json());
 
 var port = process.env.PORT || 3000;
 

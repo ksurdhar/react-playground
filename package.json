@@ -20,6 +20,7 @@
     "history": "^1.17.0",
     "immutable": "^3.7.6",
     "knex": "^0.10.0",
+    "lodash": "^4.5.1",
     "object-assign": "^4.0.1",
     "pg": "^4.4.6",
     "react": "^0.14.3",

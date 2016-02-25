@@ -1,35 +1,35 @@
-import express from 'express'
-import bodyParser = require('body-parser');
+import express from 'express';
+import { User, Users } from './models.js'
 const router = express.Router();
 
 router.route('/users')
-  .get(function (req, res) {
+  .get((req, res) => {
     Users.forge()
     .fetch()
-    .then(function (users) {
+    .then((users) => {
       res.json({ error: false, data: users.toJSON() });
     })
-    .otherwise(function (err) {
+    .catch((err) => {
       res.status(500).json({ error: true, data: { message: err.message } });
     });
   })
-  .post(function (req, res) {
+  .post((req, res) => {
     User.forge({
       username: req.body.username,
     })
-    .save().then(function (user) {
+    .save().then((user) => {
       res.json({ error: false, data: user.toJSON() });
     })
-    .otherwise(function (err) {
+    .catch((err) => {
       res.status(500).json({ error: true, data: { message: err.message } });
     });
   });
 
 router.route('/users/:id')
-  .get(function (req, res) {
+  .get((req, res) => {
     User.forge({ id: req.params.id })
     .fetch()
-    .then(function (user) {
+    .then((user) => {
       if (!user) {
         res.status(404).json({ error: true, data: {} });
       }
@@ -37,7 +37,7 @@ router.route('/users/:id')
         res.json({ error: false, data: user.toJSON() });
       }
     })
-    .otherwise(function (err) {
+    .catch((err) => {
       res.status(500).json({ error: true, data: { message: err.message } });
     });
   });

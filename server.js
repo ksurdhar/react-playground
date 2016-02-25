@@ -8,6 +8,8 @@ import { Provider }              from 'react-redux';
 import * as reducers             from 'reducers';
 import { createStore, combineReducers } from 'redux';
 import path                      from 'path';
+import bodyParser                from 'body-parser';
+
 
 var app = express();
 
@@ -17,6 +19,11 @@ if (process.env.NODE_ENV !== 'production') {
 
 app.use(express.static(path.join(__dirname, 'dist')));
 // app.use('/', express.static(path.join(__dirname, "/dist")));
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+var userRoutes = require('./api/user-routes.js');
+app.use(userRoutes);
 
 app.use( (req, res) => {
   var location = createLocation(req.url);
