@@ -3,12 +3,13 @@ import TodosView from './TodosView';
 import TodosForm from './TodosForm';
 import { bindActionCreators } from 'redux';
 import * as TodoActions from '../actions/TodoActions';
+import * as UserActions from '../actions/UserActions';
 import { connect } from 'react-redux';
 
 // @connect(state => ({ users: state.users, todos: state.todos }))
 export default class Home extends React.Component {
   static needs = [
-    TodoActions.getUsers
+    UserActions.getUsers
   ];
 
   render() {

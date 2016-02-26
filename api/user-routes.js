@@ -4,9 +4,13 @@ const router = express.Router();
 
 router.route('/users')
   .get((req, res) => {
+    console.log('I am in the get');
     Users.forge()
     .fetch()
     .then((users) => {
+      console.log('==================');
+      console.log('USERS:', users);
+      console.log('==================');
       res.json({ error: false, data: users.toJSON() });
     })
     .catch((err) => {

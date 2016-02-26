@@ -5,12 +5,10 @@ import { RouterContext, match }  from 'react-router';
 import createLocation            from 'history/lib/createLocation';
 import routes                    from 'routes';
 import { Provider }              from 'react-redux';
-import * as reducers             from 'reducers';
+import reducer                   from './shared/reducers';
 import promiseMiddleware         from './lib/promiseMiddleware';
 import fetchComponentData        from './lib/fetchComponentData';
-import { createStore,
-         combineReducers,
-         applyMiddleware }       from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import path                      from 'path';
 import bodyParser                from 'body-parser';
 
@@ -22,18 +20,16 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 app.use(express.static(path.join(__dirname, 'dist')));
-// app.use('/', express.static(path.join(__dirname, "/dist")));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
 var userRoutes = require('./api/user-routes.js');
 app.use(userRoutes);
 
 app.use( (req, res) => {
   var location = createLocation(req.url);
-  var reducer = combineReducers(reducers);
   var store = applyMiddleware(promiseMiddleware)(createStore)(reducer);
-  var store = createStore(reducer, {});
 
   match({ routes, location }, (err, redirectLocation, renderProps) => {
     if(err) {
@@ -74,15 +70,13 @@ app.use( (req, res) => {
 
       return HTML;
     }
+    console.log('RENDER PROPS:', renderProps.components);
+    console.log('--------------------');
 
-    //we aren't fetching data yet. just render the view!
     fetchComponentData(store.dispatch, renderProps.components, renderProps.params)
       .then(renderView)
       .then(html => res.end(html))
       .catch(err => res.end(err.message));
-
-    // var html = renderView();
-    // res.end(html);
   });
 });
 
