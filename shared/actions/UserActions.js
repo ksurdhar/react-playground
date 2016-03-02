@@ -1,9 +1,8 @@
 import request from 'axios';
 
 function testfunc(){
-  console.log('attempting request!');
-  //problem is the request isn't sending the right headers.
-  return request.get('/users');
+  //how do we rename this to whereever this is hosted?
+  return request.get('http://0.0.0.0:8000/users');
 }
 
 export function getUsers() {
