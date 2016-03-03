@@ -31,8 +31,6 @@ export default class TodosView extends React.Component {
     };
 
     console.log('PROPS', this.props);
-    debugger;
-
 
     // <div id="todo-list">
     //   {
@@ -48,9 +46,9 @@ export default class TodosView extends React.Component {
     //   }
     // </div>
 
-    this.props.users.map(function (user) {
-      console.log(user.username);
-    });
+    // this.props.users.map(function (user) {
+      // console.log(user.username);
+    // });
 
     return (
       <div>
@@ -59,7 +57,7 @@ export default class TodosView extends React.Component {
           this.props.users.map((user, index) => {
             return (
               <div key={index}>
-                <span>{ user.username }</span>
+                <span>{ user.get('username') }</span>
               </div>
             );
           })

@@ -47,6 +47,7 @@ app.use( (req, res) => {
         </Provider>
       );
 
+      console.log('STORE STATE:', store.getState());
       const initialState = store.getState();
       var componentHTML = renderToString(InitialView);
 
@@ -70,8 +71,8 @@ app.use( (req, res) => {
 
       return HTML;
     }
-    console.log('RENDER PROPS:', renderProps.components);
-    console.log('--------------------');
+    // console.log('RENDER PROPS:', renderProps.components);
+    // console.log('--------------------');
 
     fetchComponentData(store.dispatch, renderProps.components, renderProps.params)
       .then(renderView)

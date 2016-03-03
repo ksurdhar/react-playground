@@ -7,9 +7,9 @@ router.route('/users')
     Users.forge()
     .fetch()
     .then((users) => {
-      console.log('==================');
-      console.log('USERS:', users);
-      console.log('==================');
+      // console.log('==================');
+      // console.log('USERS:', users);
+      // console.log('==================');
       res.json({ error: false, data: users.toJSON() });
     })
     .catch((err) => {
