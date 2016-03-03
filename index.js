@@ -7,7 +7,7 @@ var server = require('./server.js').default;
 
 var port = process.env.PORT || 3000;
 
-server.listen(port, '0.0.0.0', function onStart(err) {
+server.listen(port, function onStart(err) {
   if (err) {
     console.log(err);
   }

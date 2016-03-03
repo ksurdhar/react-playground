@@ -7,10 +7,7 @@ router.route('/users')
     Users.forge()
     .fetch()
     .then((users) => {
-      // console.log('==================');
-      // console.log('USERS:', users);
-      // console.log('==================');
-      res.json({ error: false, data: users.toJSON() });
+      res.json({ users: users.toJSON() });
     })
     .catch((err) => {
       res.status(500).json({ error: true, data: { message: err.message } });

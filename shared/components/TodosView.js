@@ -30,39 +30,34 @@ export default class TodosView extends React.Component {
       'margin': '1em 0 1em 1em'
     };
 
-    console.log('PROPS', this.props);
 
-    // <div id="todo-list">
-    //   {
-    //     this.props.todos.map(function (todo, index) {
-    //       return (
-    //         <div style={ btnStyle } key={ index }>
-    //           <span>{ todo }</span>
-    //           <button style={ btnStyle } data-id={ index } onClick={ this.handleDelete }>Delete</button>
-    //           <button style={ btnStyle } data-id={ index } onClick={ this.handleEdit }>Edit</button>
-    //         </div>
-    //       );
-    //     }.bind(this))
-    //   }
-    // </div>
-
-    // this.props.users.map(function (user) {
-      // console.log(user.username);
-    // });
 
     return (
       <div>
-      <div id="users-list">
-        {
-          this.props.users.map((user, index) => {
-            return (
-              <div key={index}>
-                <span>{ user.get('username') }</span>
-              </div>
-            );
-          })
-        }
-      </div>
+        <div id="todo-list">
+          {
+            this.props.todos.map(function (todo, index) {
+              return (
+                <div style={ btnStyle } key={ index }>
+                  <span>{ todo }</span>
+                  <button style={ btnStyle } data-id={ index } onClick={ this.handleDelete }>Delete</button>
+                  <button style={ btnStyle } data-id={ index } onClick={ this.handleEdit }>Edit</button>
+                </div>
+              );
+            }.bind(this))
+          }
+        </div>
+        <div id="users-list">
+          {
+            this.props.users.map((user, index) => {
+              return (
+                <div key={index}>
+                  <span>{ user.get('username') }</span>
+                </div>
+              );
+            })
+          }
+        </div>
 
       </div>
     );
