@@ -5,7 +5,8 @@ const defaultState = new Immutable.List();
 export default function todoReducer(state = defaultState, action) {
   switch(action.type) {
     case 'GET_USERS':
-      return new Immutable.List(action.data);
+      console.log('-----------------> ACTION DATA', action.res.data.data);
+      return new Immutable.List(action.res.data.data);
     case 'CREATE_USER':
       return state.concat(action.text);
     case 'EDIT_USER':

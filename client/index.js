@@ -10,6 +10,7 @@ import { Provider } from 'react-redux';
 import { fromJS } from 'immutable';
 
 const initialState = immutifyState(window.__INITIAL_STATE__);
+debugger;
 const store = applyMiddleware(promiseMiddleware)(createStore)(reducer, initialState);
 
 render(

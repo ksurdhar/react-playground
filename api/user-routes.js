@@ -17,6 +17,7 @@ router.route('/users')
     });
   })
   .post((req, res) => {
+    console.log('attempting to make user:', req.body);
     User.forge({
       username: req.body.username,
     })
