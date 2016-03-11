@@ -17,4 +17,11 @@ const Users = Bookshelf.Collection.extend({
   model: User
 });
 
-module.exports = { User, Users }
+const Subnote = Bookshelf.Model.extend({
+  tableName: 'subnotes'
+});
+const Subnotes = Bookshelf.Collection.extend({
+  model: Subnote
+});
+
+module.exports = { User, Users, Subnote, Subnotes }

@@ -24,8 +24,11 @@ app.use(express.static(path.join(__dirname, 'dist')));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+//TODO: move all api routes into a single index file
 var userRoutes = require('./api/user-routes.js');
+var subnoteRoutes = require('./api/subnote-routes.js');
 app.use(userRoutes);
+app.use(subnoteRoutes);
 
 app.use( (req, res) => {
   var location = createLocation(req.url);

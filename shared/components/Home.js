@@ -6,7 +6,7 @@ import * as TodoActions from '../actions/TodoActions';
 import * as UserActions from '../actions/UserActions';
 import { connect } from 'react-redux';
 
-// @connect(state => ({ users: state.users, todos: state.todos }))
+@connect(state => ({ users: state.users, todos: state.todos }))
 export default class Home extends React.Component {
   static needs = [
     UserActions.getUsers
@@ -33,4 +33,4 @@ Home.proptypes = {
   dispatch: PropTypes.func.isRequired
 }
 
-export default connect(state => ({ todos: state.todos, users: state.users }))(Home)
+// export default connect(state => ({ todos: state.todos, users: state.users }))(Home)

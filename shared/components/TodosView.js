@@ -30,8 +30,6 @@ export default class TodosView extends React.Component {
       'margin': '1em 0 1em 1em'
     };
 
-
-
     return (
       <div>
         <div id="todo-list">
